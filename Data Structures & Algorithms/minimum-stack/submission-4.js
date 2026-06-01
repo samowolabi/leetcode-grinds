@@ -1,0 +1,47 @@
+class MinStack {
+    constructor() {
+        this.stack = [];
+        this.minimumStack = [];
+    }
+
+    /**
+     * @param {number} val
+     * @return {void}
+     */
+    push(val) {
+        this.stack.push(val)
+
+        if (
+            this.minimumStack.length === 0 ||
+            val <= this.minimumStack[this.minimumStack.length - 1]
+        ) {
+            this.minimumStack.push(val)
+        }
+    }
+
+    /**
+     * @return {void}
+     */
+    pop() {
+        let removedNum = this.stack.pop()
+
+        let lastMinStack = this.minimumStack[this.minimumStack.length - 1]
+        if (removedNum === lastMinStack) {
+            this.minimumStack.pop()
+        }
+    }
+
+    /**
+     * @return {number}
+     */
+    top() {
+        return this.stack[this.stack.length - 1]
+    }
+
+    /**
+     * @return {number}
+     */
+    getMin() {
+        return this.minimumStack[this.minimumStack.length - 1]
+    }
+}

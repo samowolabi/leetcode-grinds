@@ -1,0 +1,27 @@
+class Solution {
+    /**
+     * @param {string} s
+     * @return {boolean}
+     */
+    isValid(s) {
+        let arr = []
+
+        for (let i=0; i<s.length; i++) {
+            if (['(', '{', '['].includes(s[i])) {
+                arr.push(s[i])
+            } else if ([')', '}', ']'].includes(s[i])) {
+                if (s[i] === '}' && arr[arr.length-1] === '{') {
+                    arr.pop()
+                } else if (s[i] === ')' && arr[arr.length-1] === '(') {
+                    arr.pop()
+                } else if (s[i] === ']' && arr[arr.length-1] === '[') {
+                    arr.pop()
+                } else {
+                    return false
+                }
+            }
+        }
+
+        return arr.length === 0
+    }
+}
